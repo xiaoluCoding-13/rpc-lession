@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_package = "com.lzh";
+option java_outer_classname = "HelloProto";
+
+
+/**
+ *  IDL文件 目的 发布rpc服务，Service-》message-》    message《-
+ */
+message HelloRequest{
+  string name = 1;
+}
+
+message HelloResponse{
+  string result = 1;
+}
+
+message HelloRequest1{
+  //可以传递多个，类似于List
+  repeated string name = 1;
+}
+
+message HelloResponse1{
+  string result = 1;
+}
+
+service HelloService{
+  rpc hello(HelloRequest) returns (HelloResponse){}
+  rpc hello1(HelloRequest1) returns (HelloResponse1){}
+}
