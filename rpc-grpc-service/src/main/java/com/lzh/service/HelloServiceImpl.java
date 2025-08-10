@@ -15,6 +15,28 @@ import java.time.LocalTime;
 public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
 
     /**
+     * Future一元Rpc
+     * @param request
+     * @param responseObserver
+     * @date 2025/8/10 13:35
+     * @author zhehen.lu
+     */
+    @Override
+    public void hello2(HelloRequest request, StreamObserver<HelloProto.HelloResponse> responseObserver) {
+        String name = request.getName();
+        System.out.println("Future一元Rpc，客户端接收到：" + name);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        responseObserver.onNext(HelloProto.HelloResponse.newBuilder().setResult("Future一元Rpc，服务端返回响应").build());
+        responseObserver.onCompleted();
+    }
+
+    /**
      * 双向流rpc
      *
      * @param responseObserver

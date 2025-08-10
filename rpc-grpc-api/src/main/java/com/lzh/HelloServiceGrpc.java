@@ -75,6 +75,37 @@ public final class HelloServiceGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<com.lzh.HelloProto.HelloRequest,
+      com.lzh.HelloProto.HelloResponse> getHello2Method;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "hello2",
+      requestType = com.lzh.HelloProto.HelloRequest.class,
+      responseType = com.lzh.HelloProto.HelloResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<com.lzh.HelloProto.HelloRequest,
+      com.lzh.HelloProto.HelloResponse> getHello2Method() {
+    io.grpc.MethodDescriptor<com.lzh.HelloProto.HelloRequest, com.lzh.HelloProto.HelloResponse> getHello2Method;
+    if ((getHello2Method = HelloServiceGrpc.getHello2Method) == null) {
+      synchronized (HelloServiceGrpc.class) {
+        if ((getHello2Method = HelloServiceGrpc.getHello2Method) == null) {
+          HelloServiceGrpc.getHello2Method = getHello2Method =
+              io.grpc.MethodDescriptor.<com.lzh.HelloProto.HelloRequest, com.lzh.HelloProto.HelloResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "hello2"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.lzh.HelloProto.HelloRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  com.lzh.HelloProto.HelloResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new HelloServiceMethodDescriptorSupplier("hello2"))
+              .build();
+        }
+      }
+    }
+    return getHello2Method;
+  }
+
+  private static volatile io.grpc.MethodDescriptor<com.lzh.HelloProto.HelloRequest,
       com.lzh.HelloProto.HelloResponse> getCtossMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
@@ -246,6 +277,13 @@ public final class HelloServiceGrpc {
 
     /**
      */
+    default void hello2(com.lzh.HelloProto.HelloRequest request,
+        io.grpc.stub.StreamObserver<com.lzh.HelloProto.HelloResponse> responseObserver) {
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getHello2Method(), responseObserver);
+    }
+
+    /**
+     */
     default void ctoss(com.lzh.HelloProto.HelloRequest request,
         io.grpc.stub.StreamObserver<com.lzh.HelloProto.HelloResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCtossMethod(), responseObserver);
@@ -311,6 +349,14 @@ public final class HelloServiceGrpc {
 
     /**
      */
+    public void hello2(com.lzh.HelloProto.HelloRequest request,
+        io.grpc.stub.StreamObserver<com.lzh.HelloProto.HelloResponse> responseObserver) {
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
+          getChannel().newCall(getHello2Method(), getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
     public void ctoss(com.lzh.HelloProto.HelloRequest request,
         io.grpc.stub.StreamObserver<com.lzh.HelloProto.HelloResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
@@ -362,6 +408,13 @@ public final class HelloServiceGrpc {
     public com.lzh.HelloProto.HelloResponse1 hello1(com.lzh.HelloProto.HelloRequest1 request) throws io.grpc.StatusException {
       return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
           getChannel(), getHello1Method(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.lzh.HelloProto.HelloResponse hello2(com.lzh.HelloProto.HelloRequest request) throws io.grpc.StatusException {
+      return io.grpc.stub.ClientCalls.blockingV2UnaryCall(
+          getChannel(), getHello2Method(), getCallOptions(), request);
     }
 
     /**
@@ -424,6 +477,13 @@ public final class HelloServiceGrpc {
 
     /**
      */
+    public com.lzh.HelloProto.HelloResponse hello2(com.lzh.HelloProto.HelloRequest request) {
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
+          getChannel(), getHello2Method(), getCallOptions(), request);
+    }
+
+    /**
+     */
     public java.util.Iterator<com.lzh.HelloProto.HelloResponse> ctoss(
         com.lzh.HelloProto.HelloRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
@@ -462,13 +522,22 @@ public final class HelloServiceGrpc {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getHello1Method(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.lzh.HelloProto.HelloResponse> hello2(
+        com.lzh.HelloProto.HelloRequest request) {
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
+          getChannel().newCall(getHello2Method(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_HELLO = 0;
   private static final int METHODID_HELLO1 = 1;
-  private static final int METHODID_CTOSS = 2;
-  private static final int METHODID_CSTOS = 3;
-  private static final int METHODID_CSTOSS = 4;
+  private static final int METHODID_HELLO2 = 2;
+  private static final int METHODID_CTOSS = 3;
+  private static final int METHODID_CSTOS = 4;
+  private static final int METHODID_CSTOSS = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -494,6 +563,10 @@ public final class HelloServiceGrpc {
         case METHODID_HELLO1:
           serviceImpl.hello1((com.lzh.HelloProto.HelloRequest1) request,
               (io.grpc.stub.StreamObserver<com.lzh.HelloProto.HelloResponse1>) responseObserver);
+          break;
+        case METHODID_HELLO2:
+          serviceImpl.hello2((com.lzh.HelloProto.HelloRequest) request,
+              (io.grpc.stub.StreamObserver<com.lzh.HelloProto.HelloResponse>) responseObserver);
           break;
         case METHODID_CTOSS:
           serviceImpl.ctoss((com.lzh.HelloProto.HelloRequest) request,
@@ -537,6 +610,13 @@ public final class HelloServiceGrpc {
               com.lzh.HelloProto.HelloRequest1,
               com.lzh.HelloProto.HelloResponse1>(
                 service, METHODID_HELLO1)))
+        .addMethod(
+          getHello2Method(),
+          io.grpc.stub.ServerCalls.asyncUnaryCall(
+            new MethodHandlers<
+              com.lzh.HelloProto.HelloRequest,
+              com.lzh.HelloProto.HelloResponse>(
+                service, METHODID_HELLO2)))
         .addMethod(
           getCtossMethod(),
           io.grpc.stub.ServerCalls.asyncServerStreamingCall(
@@ -608,6 +688,7 @@ public final class HelloServiceGrpc {
               .setSchemaDescriptor(new HelloServiceFileDescriptorSupplier())
               .addMethod(getHelloMethod())
               .addMethod(getHello1Method())
+              .addMethod(getHello2Method())
               .addMethod(getCtossMethod())
               .addMethod(getCstosMethod())
               .addMethod(getCstossMethod())
