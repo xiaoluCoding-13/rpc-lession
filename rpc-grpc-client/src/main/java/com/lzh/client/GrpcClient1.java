@@ -11,6 +11,12 @@ import io.grpc.ManagedChannelBuilder;
  */
 public class GrpcClient1 {
 
+    /**
+     * 单对象一元rpc
+     * @param args
+     * @date 2025/8/10 10:50
+     * @author zhehen.lu
+     */
     public static void main(String[] args) {
         //1. 创建通信的管道（生产环境用TLS）
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8888).usePlaintext().build();

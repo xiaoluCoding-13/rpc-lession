@@ -13,6 +13,12 @@ import java.util.Iterator;
  */
 public class GrpcClient3 {
 
+    /**
+     * 阻塞的服务端流式rpc
+     * @param args
+     * @date 2025/8/10 10:48
+     * @author zhehen.lu
+     */
     public static void main(String[] args) {
         //1. 创建通信的管道（生产环境用TLS）
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8888).usePlaintext().build();
@@ -27,7 +33,7 @@ public class GrpcClient3 {
             HelloProto.HelloRequest helloRequest = builder.build();
 
             //3.2 进行rpc调用，获取对应的返回
-            Iterator<HelloProto.HelloResponse> ctos = helloService.ctos(helloRequest);
+            Iterator<HelloProto.HelloResponse> ctos = helloService.ctoss(helloRequest);
             //3.3 处理响应
             while (ctos.hasNext()) {
                 HelloProto.HelloResponse next = ctos.next();

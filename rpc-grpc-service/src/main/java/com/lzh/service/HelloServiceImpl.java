@@ -2,8 +2,11 @@ package com.lzh.service;
 
 import com.google.protobuf.ProtocolStringList;
 import com.lzh.HelloProto;
+import com.lzh.HelloProto.HelloRequest;
 import com.lzh.HelloServiceGrpc;
 import io.grpc.stub.StreamObserver;
+
+import java.time.LocalTime;
 
 /**
  * @author zhehen.lu
@@ -11,8 +14,53 @@ import io.grpc.stub.StreamObserver;
  */
 public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
 
+    /**
+     * 客户端流式rpc
+     *
+     * @param responseObserver
+     * @return {@link StreamObserver< HelloRequest>}
+     * @date 2025/8/10 11:25
+     * @author zhehen.lu
+     */
     @Override
-    public void ctos(HelloProto.HelloRequest request, StreamObserver<HelloProto.HelloResponse> responseObserver) {
+    public StreamObserver<HelloRequest> cstos(StreamObserver<HelloProto.HelloResponse> responseObserver) {
+        return new StreamObserver<HelloRequest>() {
+            //消息成功发生，客户端响应一个消息，就会被调用一次
+            @Override
+            public void onNext(HelloRequest helloRequest) {
+                System.out.println("接收到客户端流式rpc响应数据：" + LocalTime.now() + " " + helloRequest.getName());
+            }
+
+            //消息异常发送
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println("客户端流式响应发生异常！");
+            }
+
+            //所有消息发送结束
+            @Override
+            public void onCompleted() {
+                System.out.println("客户端流式响应全部结束！");
+                //服务器提供响应，响应目的：当接收全部客户端响应之后，处理完成，服务端响应
+                HelloProto.HelloResponse.Builder builder = HelloProto.HelloResponse.newBuilder();
+                builder.setResult("客户端流式rpc，服务端返回响应！");
+                HelloProto.HelloResponse helloResponse = builder.build();
+                responseObserver.onNext(helloResponse);
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    /**
+     * 服务端流式Rpc
+     *
+     * @param request
+     * @param responseObserver
+     * @date 2025/8/10 11:25
+     * @author zhehen.lu
+     */
+    @Override
+    public void ctoss(HelloRequest request, StreamObserver<HelloProto.HelloResponse> responseObserver) {
         //1. 接收请求参数
         String name = request.getName();
         //2. 做业务处理
@@ -73,7 +121,7 @@ public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
      * @author zhehen.lu
      */
     @Override
-    public void hello(HelloProto.HelloRequest request, StreamObserver<HelloProto.HelloResponse> responseObserver) {
+    public void hello(HelloRequest request, StreamObserver<HelloProto.HelloResponse> responseObserver) {
         //1.接收客户端的请求参数
         String name = request.getName();
 

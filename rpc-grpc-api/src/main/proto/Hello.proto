@@ -28,5 +28,6 @@ message HelloResponse1{
 service HelloService{
   rpc hello(HelloRequest) returns (HelloResponse){}
   rpc hello1(HelloRequest1) returns (HelloResponse1){}
-  rpc ctos(HelloRequest) returns (stream HelloResponse){}
+  rpc ctoss(HelloRequest) returns (stream HelloResponse){}
+  rpc cstos(stream HelloRequest) returns (HelloResponse){}
 }
