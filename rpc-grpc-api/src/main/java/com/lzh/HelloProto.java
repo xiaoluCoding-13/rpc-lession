@@ -2399,13 +2399,14 @@ public final class HelloProto {
       "\n\013Hello.proto\"\034\n\014HelloRequest\022\014\n\004name\030\001 " +
       "\001(\t\"\037\n\rHelloResponse\022\016\n\006result\030\001 \001(\t\"\035\n\r" +
       "HelloRequest1\022\014\n\004name\030\001 \003(\t\" \n\016HelloResp" +
-      "onse1\022\016\n\006result\030\001 \001(\t2\275\001\n\014HelloService\022(" +
+      "onse1\022\016\n\006result\030\001 \001(\t2\354\001\n\014HelloService\022(" +
       "\n\005hello\022\r.HelloRequest\032\016.HelloResponse\"\000" +
       "\022+\n\006hello1\022\016.HelloRequest1\032\017.HelloRespon" +
       "se1\"\000\022*\n\005ctoss\022\r.HelloRequest\032\016.HelloRes" +
       "ponse\"\0000\001\022*\n\005cstos\022\r.HelloRequest\032\016.Hell" +
-      "oResponse\"\000(\001B\027\n\007com.lzhB\nHelloProtoP\000b\006" +
-      "proto3"
+      "oResponse\"\000(\001\022-\n\006cstoss\022\r.HelloRequest\032\016" +
+      ".HelloResponse\"\000(\0010\001B\027\n\007com.lzhB\nHelloPr" +
+      "otoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -15,6 +15,39 @@ import java.time.LocalTime;
 public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
 
     /**
+     * 双向流rpc
+     *
+     * @param responseObserver
+     * @return {@link StreamObserver< HelloRequest>}
+     * @date 2025/8/10 12:58
+     * @author zhehen.lu
+     */
+    @Override
+    public StreamObserver<HelloRequest> cstoss(StreamObserver<HelloProto.HelloResponse> responseObserver) {
+
+        return new StreamObserver<HelloRequest>() {
+            @Override
+            public void onNext(HelloRequest helloRequest) {
+                System.out.println("接收到双向流，客户端响应数据：" + LocalTime.now() + " " + helloRequest.getName());
+                responseObserver.onNext(HelloProto.HelloResponse.newBuilder()
+                        .setResult("双向流rpc，服务端返回响应:" + helloRequest.getName())
+                        .build());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+                System.out.println("双向流rpc，客户端响应发生异常！");
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("双向流rpc，客户端响应全部结束！");
+                responseObserver.onCompleted();
+            }
+        };
+    }
+
+    /**
      * 客户端流式rpc
      *
      * @param responseObserver

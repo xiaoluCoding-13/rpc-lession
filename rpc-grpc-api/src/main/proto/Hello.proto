@@ -30,4 +30,5 @@ service HelloService{
   rpc hello1(HelloRequest1) returns (HelloResponse1){}
   rpc ctoss(HelloRequest) returns (stream HelloResponse){}
   rpc cstos(stream HelloRequest) returns (HelloResponse){}
+  rpc cstoss(stream HelloRequest) returns (stream HelloResponse){}
 }
