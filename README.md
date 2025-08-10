@@ -1,53 +1,81 @@
-# RPC 教学项目文档
+
+
+# RPC 教学项目
 
 ## 项目介绍
-这是一个基于 gRPC 的远程过程调用(RPC)教学项目，演示了如何构建一个完整的 RPC 通信系统。项目包含接口定义、服务端实现和客户端调用三个主要部分。
+
+这是一个用于教学的 gRPC 项目，旨在帮助开发者了解和学习远程过程调用（RPC）的基本原理和实现方式。该项目展示了如何使用 gRPC 实现四种常见的通信模式：
+- **一元调用**（Unary Call）
+- **客户端流**（Client Streaming）
+- **服务端流**（Server Streaming）
+- **双向流**（Bidirectional Streaming）
 
 ## 项目结构
+
 ```
-rpc-lession/
-├── rpc-grpc-api/        # 接口定义模块
-│   ├── HelloProto.java  # 数据传输对象定义
-│   └── HelloServiceGrpc.java  # 服务接口定义
-├── rpc-grpc-service/    # 服务端模块
-│   └── GrpcServer1.java # 服务启动类
-│   └── HelloServiceImpl.java # 服务实现类
-└── rpc-grpc-client/     # 客户端模块
-    ├── GrpcClient1.java # 客户端调用示例1
-    └── GrpcClient2.java # 客户端调用示例2
+rpc-lession
+├── LICENSE
+├── README.en.md
+├── README.md
+├── pom.xml
+├── rpc-grpc-api
+│   ├── pom.xml
+│   ├── src
+│   │   └── main
+│   │       ├── java
+│   │       │   ├── com.lzh
+│   │       │   │   ├── HelloProto.java
+│   │       │   │   └── HelloServiceGrpc.java
+│   │       │   └── proto
+│   │       │       └── Hello.proto
+├── rpc-grpc-client
+│   ├── pom.xml
+│   └── src
+│       └── main
+│           └── java
+│               └── com.lzh.client
+│                   ├── GrpcClient1.java
+│                   ├── GrpcClient2.java
+│                   ├── GrpcClient3.java
+│                   ├── GrpcClient4.java
+│                   ├── GrpcClient5.java
+│                   ├── GrpcClient6.java
+│                   └── GrpcClient7.java
+├── rpc-grpc-service
+│   ├── pom.xml
+│   └── src
+│       └── main
+│           └── java
+│               ├── GrpcServer1.java
+│               └── com.lzh.service
+│                   └── HelloServiceImpl.java
 ```
 
 ## 功能特性
-- 支持两种 RPC 方法调用：
-  - `hello`: 单个字符串参数的简单问候方法
-  - `hello1`: 支持多个字符串参数的扩展问候方法
-- 提供完整的请求/响应数据模型定义
-- 包含同步和异步调用方式的实现
+
+- 包含多种 gRPC 调用示例（一元、客户端流、服务端流、双向流）。
+- 服务端实现了所有定义的 gRPC 方法。
+- 客户端提供多个独立的示例类，分别演示不同的调用方式。
+- 支持快速搭建和运行，适合教学和学习使用。
 
 ## 使用说明
 
 ### 启动服务端
-```bash
-cd rpc-grpc-service
-mvn exec:java -Dexec.mainClass="com.lzh.GrpcServer1"
-```
+
+1. 运行 `rpc-grpc-service` 模块中的 `GrpcServer1.java` 类，启动 gRPC 服务端。
+2. 服务启动后，将监听指定的端口，等待客户端请求。
 
 ### 运行客户端
-```bash
-cd rpc-grpc-client
-mvn exec:java -Dexec.mainClass="com.lzh.client.GrpcClient1"
-```
 
-或运行第二个客户端示例:
-```bash
-mvn exec:java -Dexec.mainClass="com.lzh.client.GrpcClient2"
-```
+1. 运行 `rpc-grpc-client` 模块中的任意客户端类（如 `GrpcClient1.java` 到 `GrpcClient7.java`），每个客户端类演示了不同的 gRPC 调用方式。
+2. 客户端会连接到服务端并发送请求，随后输出服务端返回的响应。
 
 ## 依赖要求
+
 - Java 8 或更高版本
-- Maven 3.x
-- gRPC Java 库
-- Protocol Buffers 编译器
+- gRPC-Java 依赖（通过 Maven 自动管理）
+- Maven 构建工具
 
 ## 许可证
-本项目采用 Apache-2.0 许可证，详情请查看 LICENSE 文件。
+
+本项目采用 MIT 许可证，请参阅 [LICENSE](LICENSE) 文件。
