@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: boot-client
+
+server:
+  port: 8080
+
+grpc:
+  client:
+    GLOBAL:
+      address: 'static://127.0.0.1:8888'
+      negotiation-type: plaintext

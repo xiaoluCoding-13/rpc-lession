@@ -14,6 +14,7 @@
         <module>rpc-grpc-api</module>
         <module>rpc-grpc-service</module>
         <module>rpc-grpc-client</module>
+        <module>rpc-grpc-boot</module>
     </modules>
 
     <properties>
@@ -22,7 +23,6 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <spring.boot.version>3.5.4</spring.boot.version>
     </properties>
 
     <dependencies>

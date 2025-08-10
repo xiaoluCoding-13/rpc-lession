@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: boot-server
+
+  #??Tomcat
+  main:
+    web-application-type: none
+
+grpc:
+  server:
+    port: 8888
